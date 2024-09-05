@@ -16,7 +16,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./web/*"],
-      "@certifai-solana/anchor": ["anchor/src/index.ts"]
+      "@certifai-solana/anchor": ["anchor/src/index.ts"],
+      "@certifai-solana/shared": ["shared/src/index.ts"],
+      "@certifai-solana/shared/server": ["shared/src/server.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

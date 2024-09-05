@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "default",
+  "rsc": false,
+  "tailwind": {
+    "config": "web/tailwind.config.js",
+    "css": "web/app/global.css",
+    "baseColor": "stone",
+    "cssVariables": true
+  },
+  "aliases": {
+    "components": "@certifai-solana/shared/components",
+    "utils": "@certifai-solana/shared/shared/utils"
+  }
+}

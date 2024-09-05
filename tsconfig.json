@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@certifai-solana/shared": ["shared/src/index.ts"],
+      "@certifai-solana/shared/*": ["shared/src/*"]
+    }
+  }
+}
