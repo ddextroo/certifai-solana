@@ -1,5 +1,6 @@
-import DashboardFeature from '@/components/dashboard/dashboard-feature';
+import Auth from "./auth";
+
 
 export default function Page() {
-  return <DashboardFeature />;
+  return <Auth />;
 }
