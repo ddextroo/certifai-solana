@@ -15,15 +15,22 @@ import {
 import { User, Mail, GraduationCap } from 'lucide-react';
 import { WalletButton } from '@/components/solana/solana-provider';
 import { useWallet } from '@solana/wallet-adapter-react';
+import { toast } from 'react-hot-toast';
+import {
+  useCertifaiProgram,
+  useCertifaiProgramAccount,
+} from '../components/certifai/certifai-data-access';
 
-export default function Web3Auth() {
+export default function Auth() {
   const { connected, publicKey, disconnect } = useWallet();
-  const walletAddress = publicKey?.toString() || null;
+  const walletAddress = publicKey || null;
+  const { createEntry } = useCertifaiProgram();
   const [formData, setFormData] = useState({
-    first_name: '',
-    last_name: '',
-    email_address: '',
-    school_name: '',
+    first_name: 'Dex',
+    last_name: 'Tro',
+    email_address: 'dexter@gmail.com',
+    school_name: 'CTU',
+    user_role: 'Student',
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,10 +38,28 @@ export default function Web3Auth() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', { walletAddress, ...formData });
-    // Here you would typically send this data to your backend or smart contract
+
+    if (!walletAddress) {
+      toast.error('Please connect your wallet first!');
+      return;
+    }
+
+    try {
+      await createEntry.mutateAsync({
+        owner: publicKey!,
+        first_name: formData.first_name,
+        last_name: formData.last_name,
+        email_address: formData.email_address,
+        school_name: formData.school_name,
+      });
+
+      toast.success('User entry created successfully!');
+    } catch (error) {
+      toast.error('Failed to create user entry');
+      console.error(error);
+    }
   };
 
   return (
